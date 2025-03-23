@@ -8,10 +8,11 @@ class Plane : public Surface{
 public:
 	Plane(float planeD) : PlaneD(planeD) {}
 
+    // -2.0f
     float PlaneD;
 
 public:
-
+    //helped by Copilot
     virtual bool intersect(Ray* ray, float tMin, float tMax) override {
         // Plane equation: Ax + By + Cz + D = 0
         // For simplicity, we assume the plane is at y = 0 (ground plane)

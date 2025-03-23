@@ -7,19 +7,13 @@ public:
 	Sphere(vec3 center, float radius) : Center(center), Radius(radius) {}
 
 private:
-
 	vec3 Center;
 	float Radius;
 
 
-
 public:
-	//ÄÚÆÄÀÏ·µ
+	//helped by Copilot
 	virtual bool intersect(Ray* ray, float tMin, float tMax) override {
-		// Sphere equation: (x - Cx)^2 + (y - Cy)^2 + (z - Cz)^2 = r^2
-		// Sphere center: C = (Cx, Cy, Cz)
-		// Sphere radius: r
-
 		// Calculate the coefficients of the quadratic equation
 		vec3 oc = ray->origin - Center;
 		float a = glm::dot(ray->direction, ray->direction);

@@ -50,8 +50,9 @@ void render()
 	//Instead we draw to another buffer and copy this to the 
 	//framebuffer using glDrawPixels(...) every refresh
 	OutputImage.clear();
-	scene.clear();
 
+	//setting Scene
+	scene.clear();
 	scene.addSurface(&plane);
 	scene.addSurface(&sphere1);
 	scene.addSurface(&sphere2);
@@ -65,7 +66,9 @@ void render()
 			// --- Implement your code here to generate the image
 			// ---------------------------------------------------
 
+			//create Ray CameraCenter to Pixel(i,j)
 			Ray* ray = camera.getRay(i, j);
+			//result of Pixel color
 			vec3 color = scene.trace(ray,0.0f,INT_MAX);
 			
 			// set the color
@@ -139,7 +142,6 @@ int main(int argc, char* argv[])
 	//after registering it as a callback with glfw
 	glfwSetFramebufferSizeCallback(window, resize_callback);
 	resize_callback(NULL, Width, Height);
-
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))

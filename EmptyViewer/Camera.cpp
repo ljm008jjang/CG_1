@@ -7,14 +7,20 @@ using namespace std;
 
 class Camera {
 public:
+    //Center
     glm::vec3 e;
+    //Forward
     glm::vec3 w;
+    //Up
     glm::vec3 v;
+    //Right
     glm::vec3 u;
 
 
     float fov;
+    //ratio of Height and Width
     float aspectRatio;
+    // perspective Camera Value
     float nearPlane;
     float farPlane;
 
@@ -26,15 +32,9 @@ public:
 
     }
 
-    glm::mat4 getViewMatrix() {
-        return glm::lookAt(e, e - w, v);
-    }
-
-    glm::mat4 getProjectionMatrix() {
-        return glm::perspective(glm::radians(fov), aspectRatio, nearPlane, farPlane);
-    }
-
+    //Create Ray
     Ray* getRay(int ix, int iy) {
+        //coords of a pixel
 		float u = l + (r - l) * (ix + 0.5f) / 512;
 		float v = b + (t - b) * (iy + 0.5f) / 512;
 
