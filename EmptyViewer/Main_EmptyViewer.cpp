@@ -1,3 +1,5 @@
+#pragma once
+
 #include <Windows.h>
 #include <iostream>
 #include <GL/glew.h>
@@ -13,18 +15,31 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp> // Include this header for glm::value_ptr
 #include <glm/gtx/string_cast.hpp>
+#include "Ray.cpp"
+#include "Sphere.cpp"
+#include "Scene.cpp"
+#include "Camera.cpp"
+#include "Plane.cpp"
 
 using namespace glm;
 
 // -------------------------------------------------
 // Global Variables
 // -------------------------------------------------
-int Width = 1280;
-int Height = 720;
+int Width = 512;
+int Height = 512;
 std::vector<float> OutputImage;
 // -------------------------------------------------
+Scene scene;
 
+Camera camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), 45.0f, (float)Width / (float)Height, 0.1f, 100.0f);
+
+Plane plane = Plane(-2.0f);
+Sphere sphere1 = Sphere(vec3(-4,0,-7), 1);
+Sphere sphere2 = Sphere(vec3(0, 0, -7), 2);
+Sphere sphere3 = Sphere(vec3(4, 0, -7), 1);
 
 
 void render()
@@ -35,6 +50,13 @@ void render()
 	//Instead we draw to another buffer and copy this to the 
 	//framebuffer using glDrawPixels(...) every refresh
 	OutputImage.clear();
+	scene.clear();
+
+	scene.addSurface(&plane);
+	scene.addSurface(&sphere1);
+	scene.addSurface(&sphere2);
+	scene.addSurface(&sphere3);
+
 	for (int j = 0; j < Height; ++j) 
 	{
 		for (int i = 0; i < Width; ++i) 
@@ -43,14 +65,8 @@ void render()
 			// --- Implement your code here to generate the image
 			// ---------------------------------------------------
 
-			// draw a red rectangle in the center of the image
-			vec3 color = glm::vec3(0.5f, 0.5f, 0.5f); // grey color [0,1] in RGB channel
-			
-			if (i > Width / 4 && i < 3 * Width / 4 
-				&& j > Height / 4 && j < 3 * Height / 4)
-			{
-				color = glm::vec3(1.0f, 0.0f, 0.0f); // red color [0,1] in RGB channel
-			}
+			Ray* ray = camera.getRay(i, j);
+			vec3 color = scene.trace(ray,0.0f,INT_MAX);
 			
 			// set the color
 			OutputImage.push_back(color.x); // R
@@ -123,6 +139,7 @@ int main(int argc, char* argv[])
 	//after registering it as a callback with glfw
 	glfwSetFramebufferSizeCallback(window, resize_callback);
 	resize_callback(NULL, Width, Height);
+
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
