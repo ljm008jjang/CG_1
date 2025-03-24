@@ -5,12 +5,14 @@ Add surfaces to Scene.
 
 For each pixel, calculate color by intersect of Ray and surfaces.
 
-![image](https://github.com/user-attachments/assets/6a34bb74-01fb-4011-b162-cd3950f78090)
+![image](https://github.com/user-attachments/assets/789e84c3-d4a1-453b-8819-715082c50a88)
+
 
 Plane and Sphere has different intersect function
 
-![image](https://github.com/user-attachments/assets/91096df1-5239-4d71-92bc-40f9c9fdd66d)
-![image](https://github.com/user-attachments/assets/cea33215-aa11-42b8-a149-65e2eab89c37)
+![image](https://github.com/user-attachments/assets/0113bbe3-c304-4869-ad9b-bfac0bb8b94d)
+![image](https://github.com/user-attachments/assets/5c1a8b6f-9bf5-4588-8b71-ff1c539a375f)
+
 
 Run instructions:
 Download files and run OpenglViewer.sln
