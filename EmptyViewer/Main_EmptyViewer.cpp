@@ -36,7 +36,7 @@ Scene scene;
 
 Camera camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, 1.0f), 45.0f, (float)Width / (float)Height, 0.1f, 100.0f);
 
-Plane plane = Plane(-2.0f);
+Plane plane = Plane(vec3(0.0f, 1.0f, 0.0f), -2.0f);
 Sphere sphere1 = Sphere(vec3(-4,0,-7), 1);
 Sphere sphere2 = Sphere(vec3(0, 0, -7), 2);
 Sphere sphere3 = Sphere(vec3(4, 0, -7), 1);
