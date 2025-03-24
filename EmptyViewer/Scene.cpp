@@ -28,6 +28,7 @@ public:
 		for (int i = 0; i < surfaces.size(); i++) {
 			if (surfaces[i]->intersect(ray, tMin, tMax)) {
 				color = vec3(1.0f, 1.0f, 1.0f);
+				break;
 			}
 		}
 		return color;
