@@ -24,13 +24,16 @@ public:
 	vec3 trace(Ray* ray, float tMin, float tMax) {
 		//set default color
 		vec3 color = vec3(0.0f, 0.0f, 0.0f);
+		float closestT = tMax;
+		Surface* closestSurface = nullptr;
 
 		for (int i = 0; i < surfaces.size(); i++) {
-			if (surfaces[i]->intersect(ray, tMin, tMax)) {
-				color = vec3(1.0f, 1.0f, 1.0f);
-				break;
+			if (surfaces[i]->intersect(ray, tMin, closestT, &color)) {
+				closestT = tMin; // Update closest intersection point
+				closestSurface = surfaces[i];
 			}
 		}
+
 		return color;
 	}
 };

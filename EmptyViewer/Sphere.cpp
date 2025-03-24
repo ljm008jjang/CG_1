@@ -13,7 +13,7 @@ private:
 
 public:
 	//helped by Copilot
-	virtual bool intersect(Ray* ray, float tMin, float tMax) override {
+	virtual bool intersect(Ray* ray, float tMin, float tMax, vec3* pixelColor) override {
 		// Calculate the coefficients of the quadratic equation
 		vec3 oc = ray->origin - Center;
 		float a = glm::dot(ray->direction, ray->direction);
@@ -34,6 +34,7 @@ public:
 				return false; // Intersection is out of bounds
 			}
 		}
+		*pixelColor = color;
 		return true;
 	}
 };

@@ -15,7 +15,7 @@ public:
 
 public:
     //helped by Copilot
-    virtual bool intersect(Ray* ray, float tMin, float tMax) override {
+    virtual bool intersect(Ray* ray, float tMin, float tMax, vec3* pixelColor) override {
         // Calculate the denominator of the intersection formula
         float denom = dot(Normal, ray-> direction);
         if (abs(denom) < 1e-6) {
@@ -28,6 +28,7 @@ public:
             return false; // Intersection is out of bounds
         }
 
+        *pixelColor = color;
         return true;
     }
 };
